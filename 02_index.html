@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Markdown Previewer</title>
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script type="text/javascript" src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    </head>
+
+    <body>
+        <div id="root">Loading...</div>
+    </body>
+
+<!--
+    01)
+        - JSX that allows you to write HTML directly within JavaScript. 
+        - JSX is a syntactic extension of JavaScript (allows JavaScript into it) 
+        - JSX code must be compiled 
+    02)
+        - JSX is that it MUST return a single element.
+-->
+    <script type="text/babel" >
+        const JSX_h1 = <h1>some title</h1>;
+        const JSX_p  = <p>some text</p>;
+        const JSX_ul = <ul> <li>element 1</li> <li>element 2</li> <li>element 3</li> </ul>;        
+        const JSX_nested = <article> { JSX_h1 } { JSX_p } { JSX_ul } </article>; 
+        ReactDOM.render(JSX_nested, document.getElementById('root'))
+
+        /*  
+        // You can have a single variable if you prefer
+        const JSX_single = <article>
+            <h1>some title</h1>
+            <p>some text</p>
+            <ul>
+                <li>element 1</li>
+                <li>element 2</li>
+                <li>element 3</li>
+            </ul>
+        </article>;
+        ReactDOM.render(JSX_all_in, document.getElementById('root'))
+        // */
+    </script>
+    
+</html>
