@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Markdown Previewer</title>
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script type="text/javascript" src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+        <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+        <link type="text/css" rel="stylesheet" href="./style.css">
+    </head>
+
+    <body>
+        <div id="root">Loading...</div>
+    </body>
+
+<!--
+
+    00)
+        - React and ReactDOM must be imported  ( I.E. import React from 'react';) From this example it will be imported via unpkg CDN (line 8-9)
+        - React and ReactDOM required transpiling. This will be done via Babel, which from this example will be imported via unpkg CDN (line 10)
+    01)
+        - JSX that allows you to write HTML directly within JavaScript. 
+        - JSX is a syntactic extension of JavaScript (allows JavaScript into it) 
+        - JSX code must be compiled 
+        - ReactDOM.render(a, b)  method must be called after the JSX element declarations. 
+          Parameters description: 
+            a) React element or component to render
+            b) DOM node to render the component to.
+    02)
+        - JSX is that it MUST return a single element.
+    03)
+        - JSX attribute are different from html attribute (E.G. className, onClick, onChange)
+    04)
+        - Any JSX element can be written with a self-closing tag and every MUST be closed. (E.G.  <div />; <br />; <main />)
+    05) 
+        - Stateless functional component can be created using a function whose name start with a capital letter and returns either null or a JSX
+        - React components are provided to the  ReactDOM.render method with a different syntax. E.G ReactDOM.render<MyComponent />, targetNode).
+    06) 
+        - Stateless functional component can also be created declaring a ES6 class which extends React.Component and contains a render method returning a JSX
+    07) 
+        - Custom HTML attributes can be used to provides properties to child component.
+        - When dealing with stateless functional components created via function, properties are provided via argument to the function which returns the JSX. 
+        - When dealing with stateless functional components created via class, properties access is allowed via the keyword this
+        - It is standard to call this value props.
+    08) 
+        - It is possible to assign default props to a component as a property on the component itself. Default prop are used if no value is explicitly provided. 
+    09) 
+        - Type-checking features allows to verify properties type and/or existence. E.G. { MyComponent.propTypes = { someProp: PropTypes.func.isRequired } }
+        - In React func replace function, and bool replace boolean. the other 5 primitives type remain equal.
+        - PropTypes must be imported! ( I.E. import React, { PropTypes } from 'react'; ). From this example it will be imported via unpkg (line 11)
+    10)
+        - A stateless component is a class that extends React.Component but does not use internal state. 
+        - A stateless functional component is any function you write which accepts props and returns JSX, still not using internal state. 
+        - A stateful component is any component that does maintain its own internal state. Usually referred as component or React components
+        - Is a good practice to try to minimize statefulness and to create stateless functional components wherever possible. 
+        - A state can be created declaring the state property on any component. This property must be set as a Javascript object. (E.G. this.state = { /*description here*/ })
+        - It's mandatory to create a class component which extends React.Component in order to create a state. 
+    11)
+        - State can be manipulated through events and/or displayed using support variables within the render function.
+        - setState method is provided by react to any statefull component to change the state. It accept a javascript object and allows to updete the UI on changes.
+    12)
+        - State can be used to manipulated the DOM.
+
+-->
+    
+    <script type="text/babel" >
+        class StatefulComponent extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { 
+                    user: 'John',
+                    children: 0
+                }
+                this.addChild = this.addChild.bind(this);
+                this.removeChild = this.removeChild.bind(this);
+            }
+
+            addChild() {  
+                this.setState( { children: this.state.children + 1 });
+            }
+
+            removeChild() {
+                const newVal = this.state.children <= 1 ? 0 : this.state.children - 1;
+                this.setState( { children: newVal });
+            }
+
+            render = () => {
+                return (
+                    <article className="myArticle">
+                        <ChildComponentWithProps 
+                            user={this.state.user} 
+                            children={this.state.children} 
+                            addChild={ this.addChild } 
+                            removeChild={ this.removeChild } />
+                    </article>
+                );
+            }
+        };
+
+        const ChildComponentWithProps = (props) => {
+            return ( 
+                <article> 
+                    <p> My name is: { props.user } </p>
+                    <p> I have { props.children } children </p>
+                    <button onClick={ props.removeChild }>Decrement Children</ button>
+                    <button onClick={ props.addChild }>Increment Children</ button>
+                </article> 
+            );  
+        }      
+
+        ChildComponentWithProps.propTypes = {
+            addChild: PropTypes.func.isRequired,
+            removeChild: PropTypes.func.isRequired,
+        }
+
+        ReactDOM.render(<StatefulComponent />, document.getElementById('root'));
+
+    </script>
+    
+</html>

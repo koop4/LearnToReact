@@ -32,3 +32,6 @@ This approach makes for longer file but simplify its understanding allowing  a c
 10. Statefull component 
 11. State manipulation via setState 
 12. Conditionally displaying element using state
+13. State manipulation via Child component
+
+### Life
