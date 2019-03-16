@@ -9,18 +9,18 @@ This approach makes for longer file but simplify its understanding allowing  a c
 
 # Content
 
-## JSX
+### JSX
 
 1. Simple JSX
 2. Nested JSX
 3. JSX Attributes
 4. JSX closing tag
 
-## React Components
+### React Components
 
 5. Stateless component using function
 6. Stateless component using ES6 class 
 
-## Components properties 
+### Components properties 
 
 7. Component properties
