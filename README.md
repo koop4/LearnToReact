@@ -16,7 +16,7 @@ This approach makes for longer file but simplify its understanding allowing  a c
 3. JSX Attributes
 4. JSX closing tag
 
-### React Components
+### Stateless Components
 
 5. Stateless component using function
 6. Stateless component using ES6 class 
@@ -26,3 +26,7 @@ This approach makes for longer file but simplify its understanding allowing  a c
 7. Component properties
 8. Component default properties
 9. Properties type check
+
+### Statefull Components
+
+10. Statefull component 
