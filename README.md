@@ -30,3 +30,4 @@ This approach makes for longer file but simplify its understanding allowing  a c
 ### Statefull Components
 
 10. Statefull component 
+11. State manipulation via setState 
