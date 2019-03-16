@@ -33,7 +33,7 @@
     05) 
         - Stateless functional component can be created using a function whose name start with a capital letter and returns either null or a JSX
     06) 
-        - Stateless functional component can be created also declaring a ES6 class which extends React.Component and contains a render method 
+        - Stateless functional component can also be created declaring a ES6 class which extends React.Component and contains a render method returning a JSX
 
 -->
     
@@ -43,6 +43,9 @@
             render = () => ( <article className='myArticle' /> );
         }
         ReactDOM.render(<DemoComponent />, document.getElementById('root'));
+        // Alternatives
+        //ReactDOM.render(React.createElement(DemoComponent, null), document.getElementById('root'));
+        //ReactDOM.render(new DemoComponent().render(), document.getElementById('root'));
         
     </script>
     
