@@ -41,10 +41,10 @@
     07) 
         - Custom HTML attributes can be used to provides properties to child component.
         - When dealing with stateless functional components created via function, properties are provided via argument to the function which returns the JSX. 
-        - You can then access the value of the argument in the function body. 
+        - When dealing with stateless functional components created via class, properties access is allowed via the keyword this
         - It is standard to call this value props.
 -->
-    
+
     <script type="text/babel" >
 
         class ParentComponent extends React.Component {
