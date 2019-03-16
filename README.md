@@ -34,4 +34,6 @@ This approach makes for longer file but simplify its understanding allowing  a c
 12. Conditionally displaying element using state
 13. State manipulation via Child component
 
-### Life
+### LifeHooks
+
+14. ComponentDidMount Lifehook
