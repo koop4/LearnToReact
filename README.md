@@ -12,8 +12,15 @@ This approach makes for longer file but simplify its understanding allowing  a c
 ## JSX
 
 1. Simple JSX
-1. Nested JSX
-1. JSX Attributes
-1. JSX closing tag
-1. Stateless component using function
-1. Stateless component using ES6 class 
+2. Nested JSX
+3. JSX Attributes
+4. JSX closing tag
+
+## React Components
+
+5. Stateless component using function
+6. Stateless component using ES6 class 
+
+## Components properties 
+
+7. Component properties
