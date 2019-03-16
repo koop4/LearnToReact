@@ -24,3 +24,4 @@ This approach makes for longer file but simplify its understanding allowing  a c
 ### Components properties 
 
 7. Component properties
+8. Component default properties

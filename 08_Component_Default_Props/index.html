@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Markdown Previewer</title>
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script type="text/javascript" src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+        <link type="text/css" rel="stylesheet" href="./style.css">
+    </head>
+
+    <body>
+        <div id="root">Loading...</div>
+    </body>
+
+<!--
+    01)
+        - JSX that allows you to write HTML directly within JavaScript. 
+        - JSX is a syntactic extension of JavaScript (allows JavaScript into it) 
+        - JSX code must be compiled 
+        - ReactDOM.render(a, b)  method must be called after the JSX element declarations. 
+          Parameters description: 
+            a) React element or component to render
+            b) DOM node to render the component to.
+    02)
+        - JSX is that it MUST return a single element.
+    03)
+        - JSX attribute are different from html attribute (E.G. className, onClick, onChange)
+    04)
+        - Any JSX element can be written with a self-closing tag and every MUST be closed. (E.G.  <div />; <br />; <main />)
+    05) 
+        - Stateless functional component can be created using a function whose name start with a capital letter and returns either null or a JSX
+        - React components are provided to the  ReactDOM.render method with a different syntax. E.G ReactDOM.render<MyComponent />, targetNode).
+    06) 
+        - Stateless functional component can also be created declaring a ES6 class which extends React.Component and contains a render method returning a JSX
+    07) 
+        - Custom HTML attributes can be used to provides properties to child component.
+        - When dealing with stateless functional components created via function, properties are provided via argument to the function which returns the JSX. 
+          You can then access the value of the argument in the function body. 
+        - It is standard to call this value props.
+    08) 
+        - It is possible to assign default props to a component as a property on the component itself. Default prop are used if no value is explicitly provided. 
+-->
+    
+    <script type="text/babel" >
+
+        class ParentComponent extends React.Component {
+            render = () => (
+                <article className="myArticle">
+                    <ChildComponentWithProps user='Rob' />
+                    <ChildComponentWithProps />
+                </article>
+            );
+        };
+
+        const ChildComponentWithProps = (props) => ( <article> My name is: {props.user } </article> );        
+        ChildComponentWithProps.defaultProps = { user: 'John Doe' }
+
+        ReactDOM.render(<ParentComponent />, document.getElementById('root'));
+
+    </script>
+    
+</html>
