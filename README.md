@@ -25,4 +25,4 @@ This approach makes for longer file but simplify its understanding allowing  a c
 
 7. Component properties
 8. Component default properties
-8. Properties type check
+9. Properties type check

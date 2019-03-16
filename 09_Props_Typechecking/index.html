@@ -8,6 +8,7 @@
         <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
         <script type="text/javascript" src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+        <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
         <link type="text/css" rel="stylesheet" href="./style.css">
     </head>
 
@@ -16,7 +17,8 @@
     </body>
 
 <!--
-    01)
+
+    00)/\n/\t/\t- React and ReactDOM must be imported  ( I.E. import React from 'react';) From this example it will be imported via unpkg CDN (line 8-9)/\n/\t/\t- React and ReactDOM required transpiling. This will be done via Babel, which from this example will be imported via unpkg CDN (line 10)/\n/\t01)
         - JSX that allows you to write HTML directly within JavaScript. 
         - JSX is a syntactic extension of JavaScript (allows JavaScript into it) 
         - JSX code must be compiled 
@@ -38,27 +40,29 @@
     07) 
         - Custom HTML attributes can be used to provides properties to child component.
         - When dealing with stateless functional components created via function, properties are provided via argument to the function which returns the JSX. 
-          You can then access the value of the argument in the function body. 
+        - You can then access the value of the argument in the function body. 
         - It is standard to call this value props.
     08) 
         - It is possible to assign default props to a component as a property on the component itself. Default prop are used if no value is explicitly provided. 
     09) 
-        - Type-checking features allows to verify properties type and/or existence.
-        - 
+        - Type-checking features allows to verify properties type and/or existence. E.G. { MyComponent.propTypes = { someProp: PropTypes.func.isRequired } }
+        - In React func replace function, and bool replace boolean. the other 5 primitives type remain equal.
+        - PropTypes must be imported! ( I.E. import React, { PropTypes } from 'react'; ). From this example it will be imported via unpkg (line 11)
 -->
     
     <script type="text/babel" >
-
         class ParentComponent extends React.Component {
             render = () => (
                 <article className="myArticle">
                     <ChildComponentWithProps user='Rob' />
-                    <ChildComponentWithProps />
+                    <ChildComponentWithProps /> {/* Error prevented by defaultProps */}
                 </article>
             );
         };
 
-        const ChildComponentWithProps = (props) => ( <article> My name is: {props.user } </article> );        
+        const ChildComponentWithProps = (props) => ( <article> My name is: { props.user } </article> );        
+
+        ChildComponentWithProps.propTypes = { user: PropTypes.string.isRequired }
         ChildComponentWithProps.defaultProps = { user: 'John Doe' }
 
         ReactDOM.render(<ParentComponent />, document.getElementById('root'));
