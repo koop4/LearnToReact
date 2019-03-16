@@ -32,11 +32,15 @@
         - Any JSX element can be written with a self-closing tag and every MUST be closed. (E.G.  <div />; <br />; <main />)
     05) 
         - Stateless functional component can be created using a function whose name start with a capital letter and returns either null or a JSX
+        - React components are provided to the  ReactDOM.render method with a different syntax. E.G ReactDOM.render<MyComponent />, targetNode).
+
 -->
     
     <script type="text/babel" >
         const DemoComponent = () => ( <article className='myArticle' /> );
-        ReactDOM.render(DemoComponent(), document.getElementById('root'))
+        ReactDOM.render(<DemoComponent />, document.getElementById('root'))
+        // This would work too!
+        //ReactDOM.render(DemoComponent(), document.getElementById('root'))
     </script>
     
 </html>
