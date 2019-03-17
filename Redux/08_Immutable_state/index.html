@@ -14,7 +14,7 @@
     </head>
 
     <body>
-        <div>THIS EXAMPLE NEEDS TO BE FIXED</div> 
+        <div>Open your Dev tool!  (F12)</div> 
     </body>
 
 <!--
@@ -50,20 +50,23 @@
         - Redux Thunk must be imported in your code. From this example it will be imported via unpkg CDN (line 11)
         - Redux Thunk middleware must be provided to Redux.applyMiddleware(), and the returned value can be assigned as a second parameter to the createStore method
         - To create an asynchronous action, you can provide 
+    08)
+        - State should never be changed. You can use Object.assign or spread operator for this purpose
+ 
 -->
     <script type="text/babel" >
 
-        /*TO BE FIXED */
         const reducer = (state = {}, action) => {
-            return state;
+            if(action.type === 'FOO') {
+                return { ...state, foo: 'foo' };
+            } else {
+                return Object.assign( {}, state);
+            }
         }
-        //const myMiddleware = Redux.applyMiddleware( /* logger here */)
 
-        const store = Redux.createStore( reducer/*, myMiddleware*/ );
-
-        store.dispatch({ type: 'FOO'});
-
+        const store = Redux.createStore( reducer );
         const currentState = store.getState();
+        store.dispatch({ type: 'FOO'});
 
         console.log(currentState)
 
