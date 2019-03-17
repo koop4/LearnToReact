@@ -73,51 +73,49 @@
         - componentWillReceiveProps is called whenever a component is receiving new props. This method receives the new props as an argument.
         - componentDidUpdate is called immediately after a component re-renders.
         - When a page first loads, all components are mounted, after this, as state changes, components re-render themselves.
+    16) 
+        - shouldComponentUpdate method provided by React can be call when child components receive new state or props,to declare specifically if the components should update or not.
+        - shouldComponentUpdate method takes 2 parameters (nextProps and nextState) and must return a boolean.
 -->
     
     <script type="text/babel" >
-        class ChildComponent extends React.Component {
+        class OnlyEvens extends React.Component {
             constructor(props) {
                 super(props);
             }
-
-            componentWillUpdate() {
-                console.log('#componentWillUpdate -> \n\tChild Component is about to update...');
+            shouldComponentUpdate(nextProps, nextState) {
+                console.log('Should I update?');
+                return nextProps.value %2 === 0;
             }
-
             componentWillReceiveProps(nextProps) {
-                console.log('#componentWillReceiveProps ->');
-                console.log('\told props',  this.props);
-                console.log('\tnew props',  nextProps);
+                console.log('Receiving new props...');
             }
-
             componentDidUpdate() {
-                console.log('#componentDidUpdate -> \n\tChild Component updated');
+                console.log('Component re-rendered.');
             }
-
             render() {
-                return <h1>{this.props.message}</h1>
+                return <h1>{this.props.value}</h1>
             }
-        };
+            };
 
         class ParentComponent extends React.Component {
             constructor(props) {
                 super(props);
                 this.state = {
-                    message: 'First Message'
+                    value: 0
                 };
-                this.changeMessage = this.changeMessage.bind(this);
+                this.addValue = this.addValue.bind(this);
             }
-            changeMessage() {
+            addValue() {
                 this.setState({
-                    message: 'Second Message'
+                    value: this.state.value + 1
                 });
             }
             render() {
                 return (
                     <div>
-                        <button onClick={this.changeMessage}>Update</button>
-                        <ChildComponent message={this.state.message}/>
+                        <button onClick={this.addValue}>Add</button>
+                        <OnlyEvens value={this.state.value}/>
                     </div>
                 );
             }
