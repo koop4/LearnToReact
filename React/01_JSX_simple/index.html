@@ -14,15 +14,19 @@
         <div id="root">Loading...</div> 
     </body>
 
-    <!--
+<!--
+    00)
+        - React and ReactDOM must be imported  ( I.E. import React from 'react';) From this example it will be imported via unpkg CDN (line 8-9)
+        - React and ReactDOM required transpiling. This will be done via Babel, which from this example will be imported via unpkg CDN (line 10)
+    01)
         - JSX that allows you to write HTML directly within JavaScript. 
         - JSX is a syntactic extension of JavaScript (allows JavaScript into it) 
         - JSX code must be compiled 
         - ReactDOM.render(a, b)  method must be called after the JSX element declarations. 
-          Parameters description: 
+        - Parameters description: 
             a) React element or component to render
             b) DOM node to render the component to.
-    -->
+-->
     <script type="text/babel" >
         const guessWhat = 'world';
         const JSX = <div>Hello { guessWhat } </div>;
