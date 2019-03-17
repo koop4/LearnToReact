@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Markdown Previewer</title>
+        <!--script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script-->
+        <script src="https://unpkg.com/redux@4.0.1/dist/redux.js" crossorigin></script>
+        <script src="https://unpkg.com/redux-thunk@2.1.0/dist/redux-thunk.js" crossorigin></script>
+        <script type="text/javascript" src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    </head>
+
+    <body>
+        <div>Open your Dev tool!  (F12)</div> 
+    </body>
+
+<!--
+    00)
+        - Redux must be imported  ( I.E. import { <whatYouNeed> } from 'redux';) From this example it will be imported via unpkg CDN (line 10)
+    01) 
+        - The Redux store is in charge for holding and managing the application state
+        - Redux  provide the method createStore() to create a store. 
+        - This method requires a reducer function as an argument. For now we will always return the same string. 
+        - The method getState allows to retrieve the current state.
+    02)
+        - Any state updates are triggered by dispatching actions. 
+        - Actions are javascript object which have to be created and require type property, which will be used by Reducer to understand how to update the store.
+        - It is possible to also provide data to an action 
+        - the method dispatch allows to inform redux which an action on the store must be taken care of. 
+        - The method requires an action as a parameter.
+    03)
+        - Once an action has been dispatched, it's the reducer job to take care of the actual update of the state.
+        - Reducer are function taking an action and a state as arguments and return a NEW state (state is read only)
+        - Note: Redux does not enforce state immutability! (I.E. DO IT YOURSELF!)
+    04)
+        - The subribe method proveded by the Redux Store allows you to subscribe a listener function which is called whenever an action is dispatched against the store.
+    05)
+        - Multiple reducer can be combined as a single one using the Redux.combineReducers method.
+        - The combineReducers method accept an object containing as many property as your reducers. each property as the related reducer function as a value.
+        - The returned value of combineReducers can then be provided to the createStore method.
+        - Multiple reducers are usefull when managing large applications to simplify their maintenance.
+    
+    06)
+        - Action creator are simply function which return an action. 
+        - It can also be useful to create constant for different action type
+-->
+    <script type="text/babel" >
+
+        const MY_UPDATE_ACTION = 'UPDATE_MY_STORE';
+        const actionCreator = () => ({ type: MY_UPDATE_ACTION });
+
+        const reducerFn = (state, action) => action.type === MY_UPDATE_ACTION ? 'Redux is Awesome!' : 'Redux';
+
+        const store = Redux.createStore( reducerFn );
+        
+        store.dispatch( actionCreator() );
+
+        const currentState = store.getState();
+        console.log(currentState)
+
+    </script>
+    
+</html>
