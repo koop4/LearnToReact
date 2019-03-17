@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>React step by step</title>
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/redux@4.0.1/dist/redux.js" crossorigin></script>
+        <script src="https://unpkg.com/react-redux@5.0.6/dist/react-redux.js" crossorigin></script>
+        <script type="text/javascript" src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    </head>
+
+    <body>
+        <div id="root">Loading...</div>
+    </body>
+
+<!--
+    00)
+        - ReactRedux must be imported. From this example it will be imported via unpkg CDN (line 11)
+    01) 
+        - React Redux provides a small API with two key features: Provider and connect.
+        - The Provider is a wrapper component from React Redux that wraps your React app. 
+        - This wrapper then allows you to access the Redux store and dispatch functions throughout your component tree. 
+        - Provider takes two props, the Redux store and the child components of your app. 
+-->
+    <script type="text/babel" >
+        // Redux Code:
+        const ADD = 'ADD';
+        const actionCreator = (message) => ({ type: ADD, message});
+        const reducer = (state = [], action) => {
+            switch (action.type) {
+                case ADD:
+                    return [
+                        ...state,
+                        action.message
+                    ];
+                default:
+                    return state;
+            }
+        };
+        const store = Redux.createStore(reducer);
+
+        // React Code:
+        class DisplayMessages extends React.Component {
+            constructor(props) {
+        
+                super(props);
+                this.state = {
+                    input: '',
+                    messages: []
+                }
+                this.handleChange = this.handleChange.bind(this);
+                this.submitMessage = this.submitMessage.bind(this);
+            }
+
+            handleChange(event) {
+                this.setState({
+                    input: event.target.value
+                });
+            }
+        
+            submitMessage() {
+                const currentMessage = this.state.input;
+                this.setState({
+                    input: '',
+                    messages: this.state.messages.concat(currentMessage)
+                });
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h2>Type in a new Message:</h2>
+                        <input
+                            value={this.state.input}
+                            onChange={this.handleChange}/><br/>
+                        <button onClick={this.submitMessage}>Submit</button>
+                        <ul>
+                            {this.state.messages.map( (message, idx) => {
+                                return (<li key={idx}>{message}</li>)
+                                }
+                            )}
+                        </ul>
+                    </div>
+                );
+            }
+        };
+
+        const Provider = ReactRedux.Provider;
+
+        class AppWrapper extends React.Component {
+            constructor(props) {
+                super(props);
+            }
+            render() {
+                return (
+                <Provider store={store}>
+                    <DisplayMessages/>
+                </Provider>
+                )
+            }
+        };
+
+        ReactDOM.render(<AppWrapper />, document.getElementById('root'))
+
+    </script>
+    
+</html>
