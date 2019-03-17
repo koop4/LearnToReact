@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Markdown Previewer</title>
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/redux@4.0.1/dist/redux.js" crossorigin></script>
+        <script type="text/javascript" src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    </head>
+
+    <body>
+        <div id="root">Loading...</div> 
+    </body>
+
+<!--
+    00)
+        - Redux must be imported  ( I.E. import { <whatYouNeed> } from 'redux';) From this example it will be imported via unpkg CDN (line 10)
+    01) 
+        - The Redux store is in charge for holding and managing the application state
+        - Redux  provide the method createStore(r) to create a store. This method requires a reducer function as an argument.
+        - The method getState allows to retrieve the current state.
+    02)
+        - Any state updates are triggered by dispatching actions. 
+        - Actions are javascript object which have to be created and require type property, which will be used by Redux to understand how to update the store.
+        - It is possible to also provide data to an action 
+        - the method dispatch allows to inform redux which an action on the store must be taken care of. The method requires an action as a parameter.
+-->
+    <script type="text/babel" >
+
+        const reducerFn = (state = 'Redux') => state;
+        const store = Redux.createStore(reducerFn);
+
+        const exampleAction = {
+            type: 'UPDATE_MY_STORE'
+        };
+
+        store.dispatch( exampleAction );
+
+        const currentState = store.getState();
+        const JSX = <div>Hello { currentState } </div>;
+        ReactDOM.render(JSX, document.getElementById('root'))
+
+    </script>
+    
+</html>
