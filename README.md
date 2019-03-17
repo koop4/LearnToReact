@@ -36,4 +36,5 @@ This approach makes for longer file but simplify its understanding allowing  a c
 
 ### LifeHooks
 
-14. ComponentDidMount Lifehook
+14. ComponentDidMount and ComponentWillMount Lifehooks
+15. ComponentWillReceiveProps, ComponentWillUpdate and ComponentDidUpdate Lifehooks

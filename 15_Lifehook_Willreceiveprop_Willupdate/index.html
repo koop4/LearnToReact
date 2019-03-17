@@ -63,54 +63,67 @@
         - setState method is provided by react to any statefull component to change the state. It accept a javascript object and allows to updete the UI on changes.
     12)
         - State can be used to manipulated the DOM.
-    13)
-        - Parent to child component communication example.     
     14) 
         - Each component is provided with different lifehooks which will trigger at a given point of its life.
         - Here's the list: componentWillMount, componentDidMount, componentWillReceiveProps, shouldComponentUpdate, componentWillUpdate, componentDidUpdate, componentWillUnmount
         - componentWillMount method is called before the render, componentDidMount method is called after a component is mounted to de DOM.
         - REMEMBER: updating the state will trigger a re-rendering
         - componentDidMount is also the best place to attach eventListener, while componentWillUnmount is perfect to remove them.
+    15) 
+        - componentWillReceiveProps is called whenever a component is receiving new props. This method receives the new props as an argument.
+        - componentDidUpdate is called immediately after a component re-renders.
+        - When a page first loads, all components are mounted, after this, as state changes, components re-render themselves.
 -->
     
     <script type="text/babel" >
-        class MyComponent extends React.Component {
+        class ChildComponent extends React.Component {
             constructor(props) {
                 super(props);
-                this.state = { 
-                    user: 'John',
-                    keyDown: ''
-                }
-                this.handleKeydown = this.handleKeydown.bind(this);
             }
 
-            componentWillMount() {  
-                console.log('My name is ', this.state.user)
+            componentWillUpdate() {
+                console.log('#componentWillUpdate -> \n\tChild Component is about to update...');
             }
 
-            componentDidMount() {  
-                this.setState( { user: 'Rob' });
-                document.addEventListener('keydown', this.handleKeydown );
+            componentWillReceiveProps(nextProps) {
+                console.log('#componentWillReceiveProps ->');
+                console.log('\told props',  this.props);
+                console.log('\tnew props',  nextProps);
             }
 
-            componentWillUnmount() {  
-                document.removeEventListener('keydown')
+            componentDidUpdate() {
+                console.log('#componentDidUpdate -> \n\tChild Component updated');
             }
 
-            handleKeydown(event) {
-                this.setState( { keyDown: event.keyCode })
+            render() {
+                return <h1>{this.props.message}</h1>
             }
-
-            render = () => (  
-                <article className="myArticle"> 
-                    <p>My name is: { this.state.user } </p>
-                    <p> Last button pressed keycode: { this.state.keyDown }</p>
-                </article> 
-            );
-
         };
 
-        ReactDOM.render(<MyComponent />, document.getElementById('root'));
+        class ParentComponent extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    message: 'First Message'
+                };
+                this.changeMessage = this.changeMessage.bind(this);
+            }
+            changeMessage() {
+                this.setState({
+                    message: 'Second Message'
+                });
+            }
+            render() {
+                return (
+                    <div>
+                        <button onClick={this.changeMessage}>Update</button>
+                        <ChildComponent message={this.state.message}/>
+                    </div>
+                );
+            }
+        };
+
+        ReactDOM.render(<ParentComponent />, document.getElementById('root'));
 
     </script>
     
