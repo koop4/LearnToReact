@@ -5,9 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>React step by step</title>
-        <!--script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script-->
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
         <script src="https://unpkg.com/redux@4.0.1/dist/redux.js" crossorigin></script>
+        <script src="https://unpkg.com/redux-thunk@2.1.0/dist/redux-thunk.js" crossorigin></script>
+        <script src="https://unpkg.com/redux-logger@3.0.6/dist/redux-logger.js" crossorigin></script>
         <script type="text/javascript" src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
     </head>
 
@@ -35,31 +37,33 @@
         - Note: Redux does not enforce state immutability! (I.E. DO IT YOURSELF!)
     04)
         - The subribe method proveded by the Redux Store allows you to subscribe a listener function which is called whenever an action is dispatched against the store.
+    05)
+        - Multiple reducer can be combined as a single one using the Redux.combineReducers method.
+        - The combineReducers method accept an object containing as many property as your reducers. each property as the related reducer function as a value.
+        - The returned value of combineReducers can then be provided to the createStore method.
+        - Multiple reducers are usefull when managing large applications to simplify their maintenance.
+    06)
+        - Action creator are simply function which return an action. 
+        - It can also be useful to create constant for different action type
+    07)
+        - Asynchronous action can be managed thanks to Redux Thunk middleware.
+        - Redux Thunk must be imported in your code. From this example it will be imported via unpkg CDN (line 11)
+        - Redux Thunk middleware must be provided to Redux.applyMiddleware(), and the returned value can be assigned as a second parameter to the createStore method
+        - To create an asynchronous action, you can provide 
 -->
     <script type="text/babel" >
 
-        const reducerFn = (state = 'Redux', action) => {
-            if(action.type === 'UPDATE_MY_STORE') {
-                return 'Redux' + action.someData 
-            } else {
-                return 'Redux'
-            }
+        const reducer = (state = {}, action) => {
+            return state;
         }
+        //const myMiddleware = Redux.applyMiddleware( /* logger here */)
 
-        const store = Redux.createStore( reducerFn );
+        const store = Redux.createStore( reducer/*, myMiddleware*/ );
 
-        store.subscribe( () => { console.log('State Updated!'); })
-
-        const exampleAction = {
-            type: 'UPDATE_MY_STORE',
-            someData: 'is Awesome!'
-        };
-        
-        store.dispatch( exampleAction );
-        store.dispatch( exampleAction );
-        store.dispatch( exampleAction );
+        store.dispatch({ type: 'FOO'});
 
         const currentState = store.getState();
+
         console.log(currentState)
 
     </script>
