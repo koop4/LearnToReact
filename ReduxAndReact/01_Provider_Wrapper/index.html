@@ -24,18 +24,54 @@
         - The Provider is a wrapper component from React Redux that wraps your React app. 
         - This wrapper then allows you to access the Redux store and dispatch functions throughout your component tree. 
         - Provider takes two props, the Redux store and the child components of your app. 
+    02)
+        - To make sure that each component only has access to the state it needs there are two functions: mapStateToProps() and mapDispatchToProps()
+        - In these functions, you declare what pieces of state you want to have access to and which action creators you need to be able to dispatch
+        - mapDispatchToProps
 -->
     <script type="text/babel" >
-        // Redux Code:
         const ADD = 'ADD';
-        const actionCreator = (message) => ({ type: ADD, message});
-        const reducer = (state = [], action) => {
+        const myAction = (message) => ({ type: ADD, message});
+
+        const mapDispatchToProps = (dispatch) => {
+            return {
+                firstAction : () => dispatch(myAction()),
+            }
+        };
+
+        const mapStateToProps = (state, ownProps) => {
+            return {
+                counter : state.foo,
+                someComponentValue : state.things[ownProps.someIdProp]        
+            };
+        }
+
+        const MyStatelessComponent = (props) => {
+            const {counter, someComponentValue} = props;
+            const {firstAction, secondAction} = props;
+            
+            return (
+                <div>
+                    <div>Counter: {counter}</div>
+                    <div>Other value: {someComponentValue}</div>
+                    <button onClick={firstAction}>First Button</button>
+                    <button onClick={secondAction}>Second Button</button>        
+                </div>
+            );
+        };
+
+        const WrappedComponent = connect(mapStateToProps, mapDispatchToProps)(MyStatelessComponent);
+
+
+        // Redux Code:
+
+        const reducer = (state = { bar: 'bar'}, action) => {
             switch (action.type) {
                 case ADD:
-                    return [
+                    return {
                         ...state,
-                        action.message
-                    ];
+                        foo: 'foo'
+                    };
                 default:
                     return state;
             }
@@ -45,7 +81,6 @@
         // React Code:
         class DisplayMessages extends React.Component {
             constructor(props) {
-        
                 super(props);
                 this.state = {
                     input: '',
@@ -96,9 +131,9 @@
             }
             render() {
                 return (
-                <Provider store={store}>
-                    <DisplayMessages/>
-                </Provider>
+                    <Provider store={store}>
+                        <DisplayMessages/>
+                    </Provider>
                 )
             }
         };

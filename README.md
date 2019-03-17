@@ -74,24 +74,36 @@ This chapter includes 17 examples related to 6 different topics:
 Redux is a state management framework usually used with React. It can also be used with different technologies.
 Hi goal is to create and manage a single state object for your entire application.
 
-This chapter includes __ examples related to _ different topics:
+This chapter includes 8 examples related to 3 different topics:
 
 1. Store 
 1. Action
 1. Reducer
 
-## Store
+### Store
 
 1. Store Creation Retrieve
 4. Store Subscription
 
-## Action
+### Action
 
 2. Action Creation Dispatch
 6. Async Action
 
-## Reducer
+### Reducer
 
 3. Simple Action Handling
 5. Reducers Combiniation
 8. State Immutability
+
+## C3 Redux and React:
+In this chapter your React components will subscribe to only the pieces of data in the store needed to their role. Dispatch actions directly from React components!
+
+
+ This chapter includes _ examples:
+
+1. ReactRedux package
+
+### ReactRedux
+
+1. Provider API
